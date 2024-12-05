@@ -1,8 +1,13 @@
 {
   "name": "rentzilaplaywright",
   "version": "1.0.0",
+  "scripts": {
+    "test": "playwright test --project=chromium --trace on",
+    "show:report": "playwright show-report",
+    "test:headless": "playwright test",
+    "test:serviceTab": "playwright test tests/serviceTab.spec.ts --project=chromium --trace on --workers 4"
+}, 
   "main": "index.js",
-  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
