@@ -1,26 +1,7 @@
-import { test, expect } from "@playwright/test";
-import MainPage from "../pageobjects/mainPage";
-import AdvertPage from "../pageobjects/advertPage";
+import { test, expect } from "../fixtures/fixtures";
+import * as constants from "../data/constants.json";
 
-// test.beforeEach(async ({ page }) => {
-//   const mainPage = new MainPage(page);
-//   const advertPage = new AdvertPage(page);
-//   await mainPage.open();
-//   await mainPage.clickOnLoginButton();
-//   await mainPage.verifyEnterButtonIsVisible();
-//   await mainPage.enterEmailInEmailOrPhoneNumberField();
-//   await mainPage.enterPasswordInPasswordField();
-//   await mainPage.clickOnEnterButton();
-//   await mainPage.verifyLogoIsVisible();
-//   await mainPage.clickOnCreateUnitButton();
-//   await mainPage.verifyCreateUnitTitleIsVisible();
-//   await advertPage.clickOnServicesTab();
-//   await advertPage.verifyServicesTabParagrahpIsVisible();
-// });
-
-test("C410 - Verify creating new service", async ({ page }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
+test.beforeEach(async ({ mainPage, advertPage }) => {
   await mainPage.open();
   await mainPage.clickOnLoginButton();
   await mainPage.verifyEnterButtonIsVisible();
@@ -32,6 +13,9 @@ test("C410 - Verify creating new service", async ({ page }) => {
   await mainPage.verifyCreateUnitTitleIsVisible();
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
+});
+
+test("C410 - Verify creating new service", async ({ advertPage }) => {
   let newService = generateRandomString(8);
   await advertPage.enterInvalidDataInServicesField(newService);
   await advertPage.verifyServicesDropdownIsVisible();
@@ -45,20 +29,8 @@ test("C410 - Verify creating new service", async ({ page }) => {
   await advertPage.verifyChoosedSymbolIsVisible(0);
 });
 
-test("C411 - Verify choosing multiple services", async ({ page }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
+test("C411 - Verify choosing multiple services", async ({ advertPage }) => {
   const letter = "Г";
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
-  await advertPage.clickOnServicesTab();
   await advertPage.enterDataInServicesField(letter);
   await advertPage.verifyServicesDropdownIsVisible();
   await advertPage.verifyEveryDropdownElementHasText(letter);
@@ -71,20 +43,10 @@ test("C411 - Verify choosing multiple services", async ({ page }) => {
   }
 });
 
-test("C412 - Verify removing variants from choosed list", async ({ page }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
+test("C412 - Verify removing variants from choosed list", async ({
+  advertPage,
+}) => {
   const letter = "Г";
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
-  await advertPage.clickOnServicesTab();
   await advertPage.enterDataInServicesField(letter);
   await advertPage.verifyServicesDropdownIsVisible();
   await advertPage.verifyEveryDropdownElementHasText(letter);
@@ -102,60 +64,29 @@ test("C412 - Verify removing variants from choosed list", async ({ page }) => {
   await advertPage.checkServicesTabParagrahpIsNotVisible(1);
 });
 
-test("C413 - Verify 'Назад' button", async ({ page }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
+test("C413 - Verify 'Назад' button", async ({ advertPage }) => {
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
-  await advertPage.verifyBackButtonToHaveText("Назад");
+  await advertPage.verifyBackButtonToHaveText(constants.serviceTab.backButton);
   await advertPage.clickOnBackButton();
   await advertPage.verifyPhotoTabIsVisible();
-  expect(await advertPage.verifyLabelIsActive("Фотографії")).toEqual(true);
+  expect(await advertPage.verifyLabelIsActive(constants.serviceTab.photoLabel)).toEqual(true);
 });
 
-test("C414 - Verify 'Далі' button", async ({ page }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
+test("C414 - Verify 'Далі' button", async ({ advertPage }) => {
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
-  await advertPage.verifyNextButtonToHaveText("Далі");
+  await advertPage.verifyNextButtonToHaveText(constants.serviceTab.nextButton);
   await advertPage.clickOnNextButton();
   await advertPage.chooseServiceErrorMessageToHaveText(
-    "Додайте в оголошення принаймні 1 послугу"
+    constants.serviceTab.serviceErrorMessage
   );
   expect(await advertPage.verifyServicesFieldBorderIsRed()).toEqual(true);
 });
 
-test("C591 - Verify 'Послуги' input with invalid data", async ({ page }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
+test("C591 - Verify 'Послуги' input with invalid data", async ({
+  advertPage,
+}) => {
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
   await advertPage.enterSpecialSymbolsInServicesField();
@@ -163,27 +94,16 @@ test("C591 - Verify 'Послуги' input with invalid data", async ({ page }) 
 });
 
 test("C592 - Verify 'Послуги' choosing of existing service", async ({
-  page,
+  advertPage,
 }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
   const letter = "Б";
   const word = "буріння";
   const cLWord = "БУРІННЯ";
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
   await advertPage.verifyServicesTabParagrahpAsteriskToHaveText("*");
   await advertPage.verifyClueLineToHaveText(
-    "Додайте в оголошення принаймні 1 послугу"
+    constants.serviceTab.clueLineText
   );
   await advertPage.verifyMagnifyingGlassIsVisible();
   await advertPage.verifyServicesFieldToHaveAttr();
@@ -202,27 +122,16 @@ test("C592 - Verify 'Послуги' choosing of existing service", async ({
   await expect(dropdownElementText).toEqual(selectedServiceText);
   await advertPage.clearTheServicesField();
   await advertPage.verifyChoosedServiceTitleToHaveText(
-    "Послуги, які надає технічний засіб: "
+    constants.serviceTab.serviceTitle
   );
   await advertPage.verifyRemoveButtonIsVisible();
 });
 
 test("C632 - Verify entering spesial characters in the 'Послуги' field", async ({
-  page,
+  advertPage,
 }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
   const wordSpecialSymbols = "буріння^{}<>";
   const word = "буріння";
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
   await advertPage.enterSpecialSymbolsInServicesField();
@@ -232,20 +141,9 @@ test("C632 - Verify entering spesial characters in the 'Послуги' field", 
 });
 
 test("C633 - Verify data length for 'Послуги' input field", async ({
-  page,
+  advertPage,
 }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
   const symbol = ",";
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
   await advertPage.enterDataInServicesField(symbol);
@@ -260,21 +158,10 @@ test("C633 - Verify data length for 'Послуги' input field", async ({
 });
 
 test("C634 - Verify the search function is not sensitive to upper or lower case", async ({
-  page,
+  advertPage,
 }) => {
-  const mainPage = new MainPage(page);
-  const advertPage = new AdvertPage(page);
   const lowerCase = "риття";
   const upperCase = "РИТТЯ";
-  await mainPage.open();
-  await mainPage.clickOnLoginButton();
-  await mainPage.verifyEnterButtonIsVisible();
-  await mainPage.enterEmailInEmailOrPhoneNumberField();
-  await mainPage.enterPasswordInPasswordField();
-  await mainPage.clickOnEnterButton();
-  await mainPage.verifyLogoIsVisible();
-  await mainPage.clickOnCreateUnitButton();
-  await mainPage.verifyCreateUnitTitleIsVisible();
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
   await advertPage.clickOnTelegramCrossButton();

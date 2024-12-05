@@ -1,6 +1,7 @@
 import BasePage from './basePage';
 import { Locator, Page } from '@playwright/test';
 import { test, expect } from "../fixtures/fixtures";
+import * as constants from "../data/constants.json";
 
 export default class AdvertPage extends BasePage {
     private readonly servicesTab: Locator;
@@ -73,7 +74,7 @@ export default class AdvertPage extends BasePage {
         await expect(this.createUnitButtonPlus).toBeVisible()
     }
     async verifyCreateUnitButtonTextIsCorrect() {
-        await expect(this.createUnitButton).toHaveText('Створити послугу')
+        await expect(this.createUnitButton).toHaveText(constants.serviceTab.createUnit)
     }
     async clickOnCreateUnitButton() {
         await this.createUnitButton.click()

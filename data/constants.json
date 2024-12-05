@@ -1,0 +1,11 @@
+{
+    "serviceTab": {
+    "backButton": "Назад",
+    "photoLabel": "Фотографії",
+    "nextButton": "Далі",
+    "serviceErrorMessage": "Додайте в оголошення принаймні 1 послугу",
+    "clueLineText": "Додайте в оголошення принаймні 1 послугу",
+    "serviceTitle": "Послуги, які надає технічний засіб: ",
+    "createUnit": "Створити послугу"
+  }
+}
