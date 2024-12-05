@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+require('dotenv').config()
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -8,7 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'https://dev.rentzila.com.ua/',
+    baseURL: process.env.BASE_URL,
     trace: 'on-first-retry',
   },
   timeout: 120_000,

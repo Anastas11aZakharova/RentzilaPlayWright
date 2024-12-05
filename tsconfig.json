@@ -6,7 +6,7 @@
       "esModuleInterop": true,
       "resolveJsonModule": true, 
       "skipLibCheck": true,
-      "types": ["@playwright/test"],
+      "types": ["@playwright/test", "@types/node"],
       "moduleResolution": "Node"
     },
     "include": ["**/*.ts"], 

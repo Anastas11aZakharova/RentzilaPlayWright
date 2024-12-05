@@ -1,5 +1,10 @@
 import BasePage from './basePage';
 import { expect, Locator, Page } from '@playwright/test';
+import * as dotenv from "dotenv";
+
+dotenv.config();
+const validEmail = process.env.MY_EMAIL || "default_email@example.com";
+const validPassword = process.env.MY_PASSWORD || "default_password";
 
 export default class MainPage extends BasePage {
     private readonly createUnitButton: Locator;
@@ -31,10 +36,10 @@ export default class MainPage extends BasePage {
         await expect(this.enterButton).toBeVisible()
     }
     async enterEmailInEmailOrPhoneNumberField() {
-        await this.emailOrPhoneNumberField.fill('nastya.zkhrvvvv@gmail.com')
+        await this.emailOrPhoneNumberField.fill(validEmail)
     }
     async enterPasswordInPasswordField() {
-        await this.passwordField.fill('4CfzPLpFyzFM82Z')
+        await this.passwordField.fill(validPassword)
     }
     async clickOnEnterButton() {
         await this.enterButton.click()
