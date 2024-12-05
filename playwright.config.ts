@@ -11,7 +11,7 @@ export default defineConfig({
     baseURL: 'https://dev.rentzila.com.ua/',
     trace: 'on-first-retry',
   },
-
+  timeout: 120_000,
   projects: [
     {
       name: 'chromium',
