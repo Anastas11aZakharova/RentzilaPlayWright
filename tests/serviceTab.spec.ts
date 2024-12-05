@@ -1,6 +1,16 @@
 import { test, expect } from "../fixtures/fixtures";
 import * as constants from "../data/constants.json";
 
+function generateRandomString(length: number): string {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
 test.beforeEach(async ({ mainPage, advertPage }) => {
   await mainPage.open();
   await mainPage.clickOnLoginButton();
@@ -43,9 +53,7 @@ test("C411 - Verify choosing multiple services", async ({ advertPage }) => {
   }
 });
 
-test("C412 - Verify removing variants from choosed list", async ({
-  advertPage,
-}) => {
+test("C412 - Verify removing variants from choosed list", async ({ advertPage }) => {
   const letter = "Г";
   await advertPage.enterDataInServicesField(letter);
   await advertPage.verifyServicesDropdownIsVisible();
@@ -84,18 +92,14 @@ test("C414 - Verify 'Далі' button", async ({ advertPage }) => {
   expect(await advertPage.verifyServicesFieldBorderIsRed()).toEqual(true);
 });
 
-test("C591 - Verify 'Послуги' input with invalid data", async ({
-  advertPage,
-}) => {
+test("C591 - Verify 'Послуги' input with invalid data", async ({ advertPage }) => {
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
   await advertPage.enterSpecialSymbolsInServicesField();
   await advertPage.checkServicesFieldIsEmpty();
 });
 
-test("C592 - Verify 'Послуги' choosing of existing service", async ({
-  advertPage,
-}) => {
+test("C592 - Verify 'Послуги' choosing of existing service", async ({ advertPage }) => {
   const letter = "Б";
   const word = "буріння";
   const cLWord = "БУРІННЯ";
@@ -127,9 +131,7 @@ test("C592 - Verify 'Послуги' choosing of existing service", async ({
   await advertPage.verifyRemoveButtonIsVisible();
 });
 
-test("C632 - Verify entering spesial characters in the 'Послуги' field", async ({
-  advertPage,
-}) => {
+test("C632 - Verify entering spesial characters in the 'Послуги' field", async ({ advertPage }) => {
   const wordSpecialSymbols = "буріння^{}<>";
   const word = "буріння";
   await advertPage.clickOnServicesTab();
@@ -140,9 +142,7 @@ test("C632 - Verify entering spesial characters in the 'Послуги' field", 
   await advertPage.verifyServicesFieldToHaveText(word);
 });
 
-test("C633 - Verify data length for 'Послуги' input field", async ({
-  advertPage,
-}) => {
+test("C633 - Verify data length for 'Послуги' input field", async ({ advertPage }) => {
   const symbol = ",";
   await advertPage.clickOnServicesTab();
   await advertPage.verifyServicesTabParagrahpIsVisible();
@@ -157,9 +157,7 @@ test("C633 - Verify data length for 'Послуги' input field", async ({
   }
 });
 
-test("C634 - Verify the search function is not sensitive to upper or lower case", async ({
-  advertPage,
-}) => {
+test("C634 - Verify the search function is not sensitive to upper or lower case", async ({ advertPage }) => {
   const lowerCase = "риття";
   const upperCase = "РИТТЯ";
   await advertPage.clickOnServicesTab();
@@ -182,13 +180,3 @@ test("C634 - Verify the search function is not sensitive to upper or lower case"
   selectedServiceText = await advertPage.getTextFromSelectedService(0);
   await expect(dropdownElementText).toEqual(selectedServiceText);
 });
-
-function generateRandomString(length: number): string {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
