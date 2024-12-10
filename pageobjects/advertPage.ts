@@ -1,6 +1,6 @@
 import BasePage from "./basePage";
 import { Locator, Page } from "@playwright/test";
-import { test, expect } from "../fixtures/fixtures";
+import { expect } from "../fixtures/fixtures";
 
 export default class AdvertPage extends BasePage {
   readonly fields: Record<string, Locator>;

@@ -7,5 +7,15 @@
     "clueLineText": "Додайте в оголошення принаймні 1 послугу",
     "serviceTitle": "Послуги, які надає технічний засіб: ",
     "createUnit": "Створити послугу"
+  },
+  "testData": {
+    "letter1": "Г",
+    "letter2": "Б",
+    "word": "буріння",
+    "cLWord": "БУРІННЯ",
+    "wordSpecialSymbols": "буріння^{}<>",
+    "symbol": ",",
+    "lowerCase": "риття",
+    "upperCase": "РИТТЯ"
   }
 }
