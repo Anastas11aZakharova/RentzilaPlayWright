@@ -29,3 +29,9 @@ Running an service suite
 ```
 npm run test:serviceTab
 ```
+
+Show full report of your tests
+
+```
+npm run show:report
+```
