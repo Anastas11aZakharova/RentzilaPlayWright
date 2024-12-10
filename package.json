@@ -8,17 +8,17 @@
     "test:serviceTab": "playwright test tests/serviceTab.spec.ts --project=chromium --trace on --workers 4"
 }, 
   "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": ["Rentzila","Playwright","automation","TypeScript"],
+  "author": "Anastasiia Zakharova",
+  "license": "MIT",
+  "description": "Performs automation testing on the Rentzila website.",
   "devDependencies": {
+  },
+  "dependencies": {
     "@playwright/test": "^1.49.0",
     "@types/node": "^22.9.3",
     "playwright": "^1.49.0",
-    "typescript": "^5.7.2"
-  },
-  "dependencies": {
+    "typescript": "^5.7.2",
     "dotenv": "^16.4.7"
   }
 }
