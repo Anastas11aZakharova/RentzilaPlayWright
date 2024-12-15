@@ -1,0 +1,22 @@
+{
+  "serviceTab": {
+    "backButton": "Назад",
+    "photoLabel": "Фотографії",
+    "nextButton": "Далі",
+    "serviceErrorMessage": "Додайте в оголошення принаймні 1 послугу",
+    "clueLineText": "Додайте в оголошення принаймні 1 послугу",
+    "serviceTitle": "Послуги, які надає технічний засіб: ",
+    "createUnit": "Створити послугу",
+    "placeholderText": "Наприклад: Рихлення грунту, буріння"
+  },
+  "testData": {
+    "letter1": "Г",
+    "letter2": "Б",
+    "word": "буріння",
+    "cLWord": "БУРІННЯ",
+    "wordSpecialSymbols": "буріння^{}<>",
+    "symbol": ",",
+    "lowerCase": "риття",
+    "upperCase": "РИТТЯ"
+  }
+}
