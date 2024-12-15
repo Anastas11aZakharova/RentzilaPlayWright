@@ -8,7 +8,7 @@ const validEmail = process.env.MY_EMAIL || "default_email@example.com";
 const validPassword = process.env.MY_PASSWORD || "default_password";
 
 test.beforeEach(async ({ mainPage, advertPage }) => {
-  await mainPage.page.goto("/")
+  await mainPage.goto("/")
   await mainPage.buttons.loginButton.click();
   await expect(mainPage.buttons.enterButton).toBeVisible();
   await mainPage.fields.emailOrPhoneNumberField.fill(validEmail);
