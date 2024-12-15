@@ -1,6 +1,7 @@
 import BasePage from "./basePage";
 import { Locator, Page } from "@playwright/test";
 import { expect } from "../fixtures/fixtures";
+import * as constants from "../data/constants.json"; 
 
 export default class AdvertPage extends BasePage {
   readonly fields: Record<string, Locator>;
@@ -56,7 +57,8 @@ export default class AdvertPage extends BasePage {
       ),
       choosedServiceTitle: page.getByText(
         "Послуги, які надає технічний засіб: "
-      )
+      ),
+      magnifyingGlassIcon: this.fields.servicesField.locator("xpath=preceding-sibling::*")
     };
   }
 
@@ -123,14 +125,14 @@ export default class AdvertPage extends BasePage {
 
   async verifyMagnifyingGlassIsVisible() {
     await expect(
-      this.fields.servicesField.locator("xpath=preceding-sibling::*")
+     this.elements.magnifyingGlassIcon
     ).toBeVisible();
   }
 
   async verifyServicesFieldToHaveAttr() {
     await expect(this.fields.servicesField).toHaveAttribute(
       "placeholder",
-      "Наприклад: Рихлення грунту, буріння"
+      constants.serviceTab.placeholderText
     );
   }
 

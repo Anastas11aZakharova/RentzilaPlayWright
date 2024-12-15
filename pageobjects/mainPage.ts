@@ -1,5 +1,5 @@
 import BasePage from "./basePage";
-import { expect, Locator, Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import * as dotenv from "dotenv";
 
 dotenv.config();
