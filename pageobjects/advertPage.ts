@@ -1,7 +1,7 @@
 import BasePage from "./basePage";
 import { Locator, Page } from "@playwright/test";
 import { expect } from "../fixtures/fixtures";
-import * as constants from "../data/constants.json"; 
+import * as constants from "../data/constants.json";
 
 export default class AdvertPage extends BasePage {
   readonly fields: Record<string, Locator>;
@@ -13,7 +13,7 @@ export default class AdvertPage extends BasePage {
     this.fields = {
       servicesField: page.getByPlaceholder(
         "Наприклад: Рихлення грунту, буріння"
-      )
+      ),
     };
 
     this.buttons = {
@@ -23,28 +23,24 @@ export default class AdvertPage extends BasePage {
       removeButton: page.getByTestId("remove-servicesUnitFlow"),
       backButton: page.getByText("Назад"),
       nextButton: page.getByTestId("nextButton"),
-      telegramCrossIcon: page.getByTestId("crossIcon")
+      telegramCrossIcon: page.getByTestId("crossIcon"),
     };
-      
+
     this.elements = {
       servicesTabParagrahp: page.getByText(
         "Знайдіть послуги, які надає Ваш технічний засіб "
       ),
       servicesDropdown: page.locator(
         "[class*=ServicesUnitFlow_searchedServicesCatWrapper]"
-      ), 
-      servicesDropdownErrorMesage: page.getByTestId(
-        "p2-notFound-addNewItem"
       ),
+      servicesDropdownErrorMesage: page.getByTestId("p2-notFound-addNewItem"),
       dropdownElements: page.locator(
         "[class*=ServicesUnitFlow_searchListItem]"
       ),
       choosedSymbol: page.locator(
         "//button[@data-testid='unitServicesButton']//*[local-name()='svg']"
       ),
-      choosedService: page.locator(
-        "[class*=ServicesUnitFlow_serviceText]"
-      ),
+      choosedService: page.locator("[class*=ServicesUnitFlow_serviceText]"),
       photoTab: page.locator("span", { hasText: "Фотографії" }),
       tabList: page.getByRole("tablist"),
       chooseServiceErrorMessage: page.getByTestId("add-info"),
@@ -52,23 +48,28 @@ export default class AdvertPage extends BasePage {
       servicesTabParagrahpAsterisk: page.locator(
         "//div[@class='ServicesUnitFlow_paragraph__ATZCK']//span[text()='*']"
       ),
-      clueLine: page.getByText(
-        "Додайте в оголошення принаймні 1 послугу"
-      ),
+      clueLine: page.getByText("Додайте в оголошення принаймні 1 послугу"),
       choosedServiceTitle: page.getByText(
         "Послуги, які надає технічний засіб: "
       ),
-      magnifyingGlassIcon: this.fields.servicesField.locator("xpath=preceding-sibling::*")
+      magnifyingGlassIcon: this.fields.servicesField.locator(
+        "xpath=preceding-sibling::*"
+      ),
     };
   }
 
   async verifyChoosedSymbolIsVisible(number: number) {
-    await expect(this.elements.choosedSymbol.nth(number)).toHaveAttribute("width", "15");
+    await expect(this.elements.choosedSymbol.nth(number)).toHaveAttribute(
+      "width",
+      "15"
+    );
   }
 
   async verifyEveryDropdownElementHasText(text: string) {
     for (let i = 0; i < (await this.elements.dropdownElements.count()); i++) {
-      const initialText = await this.elements.dropdownElements.nth(i).textContent();
+      const initialText = await this.elements.dropdownElements
+        .nth(i)
+        .textContent();
       const upper = initialText?.toUpperCase();
       expect(upper).toContain(text.toUpperCase());
     }
@@ -95,7 +96,9 @@ export default class AdvertPage extends BasePage {
   }
 
   async checkServicesTabParagrahpIsNotVisible(number: number) {
-    await expect(this.elements.servicesTabParagrahp.nth(number)).not.toBeVisible();
+    await expect(
+      this.elements.servicesTabParagrahp.nth(number)
+    ).not.toBeVisible();
   }
 
   public async verifyLabelIsActive(label: string): Promise<boolean> {
@@ -124,9 +127,7 @@ export default class AdvertPage extends BasePage {
   }
 
   async verifyMagnifyingGlassIsVisible() {
-    await expect(
-     this.elements.magnifyingGlassIcon
-    ).toBeVisible();
+    await expect(this.elements.magnifyingGlassIcon).toBeVisible();
   }
 
   async verifyServicesFieldToHaveAttr() {

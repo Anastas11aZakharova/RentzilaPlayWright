@@ -24,10 +24,16 @@ Running All Tests in Chrome Headed Mode
 npm run test
 ```
 
-Running an service suite
+Running a service suite
 
 ```
 npm run test:serviceTab
+```
+
+Running a createUnitAPI suite
+
+```
+npm run test:createUnitAPI
 ```
 
 Show full report of your tests
