@@ -17,7 +17,7 @@ export default class MainPage extends BasePage {
       emailOrPhoneNumberField: page.getByPlaceholder(
         "Введіть e-mail або номер телефону"
       ),
-      passwordField: page.getByPlaceholder("Введіть пароль")
+      passwordField: page.getByPlaceholder("Введіть пароль"),
     };
 
     this.buttons = {
@@ -26,11 +26,12 @@ export default class MainPage extends BasePage {
       enterButton: page.getByRole("button", {
         exact: true,
         name: "Увійти",
-      })
+      }),
+      myPage: page.getByTestId("avatarBlock"),
     };
 
     this.elements = {
-        logo: page.locator("[class*=Navbar_logoWrapper]")
+      logo: page.locator("[class*=Navbar_logoWrapper]"),
     };
   }
 }
